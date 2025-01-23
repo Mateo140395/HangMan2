@@ -39,9 +39,9 @@ public class HangMan {
 
     /**
      * Modificamos a palabra oculta
-     * @param hiddenword 
+     * @param hiddenWord 
      */
-    public void setHiddenWord(HiddenWord hiddenword) {
+    public void setHiddenWord(HiddenWord hiddenWord) {
         this.hiddenWord = hiddenWord;
     }
 
@@ -82,7 +82,8 @@ public class HangMan {
     }
     
     /**
-     * Referencia a método doutra clase que comproba caracteres. Agora ademáis engade os caracteres a comprobar nos fallos se procede
+     * Referencia a método doutra clase que comproba caracteres. Agora ademáis
+     * engade os caracteres a comprobar nos fallos se procede
      * @param c 
      */
     public void tryChar(char c) {
