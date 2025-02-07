@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package hangman;
+package hangman.model;
 
 import java.util.ArrayList;
 
@@ -105,6 +105,6 @@ public class HangMan {
      * @return 
      */
     public boolean maxFailsExceeded(){
-        return fails.size()>MAX_FAILS;
+        return fails.size()==MAX_FAILS;
     }
 }
