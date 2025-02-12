@@ -7,44 +7,53 @@ package hangman.model;
 import java.util.Arrays;
 
 /**
- *Clase que implementa diversos métodos para as funcionalidades relativas á palabra(comprobar letras, ensinar a palabra...)
+ * Clase que implementa diversos métodos para as funcionalidades relativas á
+ * palabra(comprobar letras, ensinar a palabra...)
+ *
  * @author Mateo
  */
 public class HiddenWord {
+
     //Array de caracteres que compoñen a palabra
     private char[] characters;
     //Atributo que acumula os acertos
     private boolean[] hits;
 
     /**
-     * Constructor da palabra. Recibe a palabra e convertea nun conxunto de caracteres
-     * @param guessword 
+     * Constructor da palabra. Recibe a palabra e convertea nun conxunto de
+     * caracteres
+     *
+     * @param guessword
      */
     public HiddenWord(String guessword) {
         this.characters = guessword.toCharArray();
-        this.hits= new boolean[characters.length];
-        
-       Arrays.fill(hits, false);
+        this.hits = new boolean[characters.length];
+
+        Arrays.fill(hits, false);
     }
+
     /**
      * Recuperamos os caracteres
-     * @return 
+     *
+     * @return
      */
     public char[] getCharacters() {
         return characters;
     }
-    
+
     /**
      * Modificamos os caracteres
-     * @param characters 
+     *
+     * @param characters
      */
     public void setCharacters(char[] characters) {
         this.characters = characters;
     }
-    
+
     /**
      * Recuperamos os acertos
-     * @return 
+     *
+     * @return
      */
     public boolean[] getHits() {
         return hits;
@@ -52,66 +61,74 @@ public class HiddenWord {
 
     /**
      * Modificamos os acertos
-     * @param hits 
+     *
+     * @param hits
      */
     public void setHits(boolean[] hits) {
         this.hits = hits;
     }
-    
+
     /**
      * Método que comproba se o caracter está na palabra
+     *
      * @param c
-     * @return 
+     * @return
      */
-    public boolean checkChar(char c){
-        for(int i=0; i<characters.length;i++){
-            if(c==characters[i]){
-                hits[i]=true;
-                return true;
+    public boolean checkChar(char c) {
+        boolean hit=false;
+        for (int i = 0; i < characters.length; i++) {
+            if (c == characters[i]) {
+                hits[i] = true;
+                hit= true;
             }
-            
+
         }
-        return false;
+        return hit;
     }
+
     /**
-     * Ensina a palabra cos caracteres descubertos e guións en lugar dos non descubertos
-     * @return 
+     * Ensina a palabra cos caracteres descubertos e guións en lugar dos non
+     * descubertos
+     *
+     * @return
      */
-    public String show(){
-        String result="";
-        for (int i=0; i<characters.length;i++){
-            if(hits[i]){
-                result+=characters[i];
-            }else{
-                result+="-";
+    public String show() {
+        String result = "";
+        for (int i = 0; i < characters.length; i++) {
+            if (hits[i]) {
+                result += characters[i];
+            } else {
+                result += "-";
             }
         }
         return result;
     }
-    
+
     /**
      * Ensina a palabra completa
-     * @return 
+     *
+     * @return
      */
-    public String showFullWord(){
-        String fullword="";
-        for(int i=0; i<characters.length;i++){
-        fullword+=characters[i];
+    public String showFullWord() {
+        String fullword = "";
+        for (int i = 0; i < characters.length; i++) {
+            fullword += characters[i];
         }
         return fullword;
     }
-    
+
     /**
      * Método que se asegura de se a palabra foi descuberta
-     * @return 
+     *
+     * @return
      */
     public boolean isVisible() {
-        for (int i = 0; i < characters.length; i++) {
-            if (!hits[i]) {
+        for (boolean isVisible : hits) {
+            if (!isVisible) {
                 return false;
             }
         }
         return true;
     }
-    
+
 }

@@ -12,7 +12,8 @@ public class KeyboardWordGenerator implements WordGenerator{
 
     @Override
     public String generateWord() throws GenerateWordException {
-        System.out.println("Introduza a palabra a adiviñar polo outro xogador: ");
+        
+                System.out.println("Introduza a palabra a adiviñar polo outro xogador: ");
         String word= new String(System.console().readPassword());
         return word;
     }

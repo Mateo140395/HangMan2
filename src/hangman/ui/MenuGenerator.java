@@ -48,7 +48,7 @@ public class MenuGenerator {
      */
     private String showInitMenu() throws GenerateWordException {
         WordGenerator wordGenerator = null;
-        int option = 0;
+        int option=0;
         do {
             Scanner scan = new Scanner(System.in);
             System.out.println("Benvido. Escolla o modo de xogo:");
@@ -65,7 +65,7 @@ public class MenuGenerator {
             }
         } while (option != 1 && option != 2);
 
-        return "";
+        return wordGenerator.generateWord();
     }
 
     /**
@@ -75,7 +75,7 @@ public class MenuGenerator {
         Scanner scan = new Scanner(System.in);
         System.out.println("Palabra preparada. Comezamos a partida.");
         //Pedimos as letras a probar
-        do {
+        while (!hangMan.isGameOver()) {
             System.out.println("Palabra a adiviñar: "+hangMan.getHiddenWord().show());
             System.out.println("Letras falladas: "+hangMan.getStringFails());
             
@@ -84,7 +84,7 @@ public class MenuGenerator {
             hangMan.tryChar(character);
             //Se falla imos ensinando a lista de fallos e se acerta a palabra con guións nas letras aínda non descubertas
 
-        } while (!hangMan.isGameOver());
+        } 
         //Se acerta informamos ao usuario e se queda sen intentos mostramos cal era a palabra
         if (hangMan.maxFailsExceeded()) {
             System.out.println("Número de intentos superado. A palabra era: " + hangMan.showFullWord());
