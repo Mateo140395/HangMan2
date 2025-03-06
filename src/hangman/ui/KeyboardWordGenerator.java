@@ -8,14 +8,14 @@ package hangman.ui;
  *
  * @author Mateo
  */
-public class KeyboardWordGenerator implements WordGenerator{
+public class KeyboardWordGenerator implements WordGenerator {
 
     @Override
     public String generateWord() throws GenerateWordException {
-        
-                System.out.println("Introduza a palabra a adiviñar polo outro xogador: ");
-        String word= new String(System.console().readPassword());
+
+        System.out.println("Introduza a palabra a adiviñar polo outro xogador: ");
+        String word = new String(System.console().readPassword());
         return word;
     }
-    
+
 }
