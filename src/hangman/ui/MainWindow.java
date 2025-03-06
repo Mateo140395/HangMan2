@@ -72,6 +72,8 @@ public class MainWindow extends javax.swing.JFrame {
         tryCharLabel = new javax.swing.JLabel();
         tryCharText = new javax.swing.JTextField();
         tryButton = new javax.swing.JButton();
+        showFailsLabel = new javax.swing.JLabel();
+        showHiddenWorddLabel = new javax.swing.JLabel();
         rightPanel = new javax.swing.JPanel();
         firstLabel = new javax.swing.JLabel();
         oneFailLabel = new javax.swing.JLabel();
@@ -170,6 +172,16 @@ public class MainWindow extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         leftPanel.add(tryButton, gridBagConstraints);
 
+        showFailsLabel.setForeground(new java.awt.Color(0, 0, 0));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        leftPanel.add(showFailsLabel, gridBagConstraints);
+
+        showHiddenWorddLabel.setForeground(new java.awt.Color(0, 0, 0));
+        showHiddenWorddLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        leftPanel.add(showHiddenWorddLabel, new java.awt.GridBagConstraints());
+
         getContentPane().add(leftPanel, java.awt.BorderLayout.CENTER);
 
         rightPanel.setBackground(new java.awt.Color(153, 153, 153));
@@ -218,7 +230,13 @@ public class MainWindow extends javax.swing.JFrame {
         };
 
         JOptionPane.showInputDialog(bottomPanel, "Seleccione un modo de xogo", "Modo de xogo", HEIGHT, null, option, option[0]);
-        
+        if (option != null) {
+            if (option.equals(option[0])) {
+                
+            } else {
+                
+            }
+        }
     }
 
     /**
@@ -269,6 +287,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton newGameButton;
     private javax.swing.JLabel oneFailLabel;
     private javax.swing.JPanel rightPanel;
+    private javax.swing.JLabel showFailsLabel;
+    private javax.swing.JLabel showHiddenWorddLabel;
     private javax.swing.JLabel sixFailsLabel;
     private javax.swing.JLabel threeFailsLabel;
     private javax.swing.JLabel titleLabel;

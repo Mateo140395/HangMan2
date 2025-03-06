@@ -28,7 +28,7 @@ public class HiddenWord {
     public HiddenWord(String guessword) {
         this.characters = guessword.toCharArray();
         this.hits = new boolean[characters.length];
-
+        //Enche o array de false. Cada posición pasará a true cando se acerte o caracter
         Arrays.fill(hits, false);
     }
 
@@ -75,7 +75,9 @@ public class HiddenWord {
      * @return
      */
     public boolean checkChar(char c) {
+        //Boolean auxiliar que comeza en false
         boolean hit=false;
+        //Recorremos o array e se o caracter coincide con algunha posición pasamos esa posición a true
         for (int i = 0; i < characters.length; i++) {
             if (c == characters[i]) {
                 hits[i] = true;
@@ -93,7 +95,9 @@ public class HiddenWord {
      * @return
      */
     public String show() {
+        //String en branco para o resultado
         String result = "";
+        //Percorremos o array e se hai acerto imprimimos a letra na súa posición, en caso contrario amosamos un guión
         for (int i = 0; i < characters.length; i++) {
             if (hits[i]) {
                 result += characters[i];

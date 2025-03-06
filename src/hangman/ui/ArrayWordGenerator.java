@@ -30,6 +30,7 @@ public class ArrayWordGenerator implements WordGenerator {
     @Override
     public String generateWord() throws GenerateWordException{
         Random random = new Random();
+        //Creamos unha variable índice para a selección aleatoria da palabra
         int index = random.nextInt(WORDLIST.length);
         return WORDLIST[index];
     }
