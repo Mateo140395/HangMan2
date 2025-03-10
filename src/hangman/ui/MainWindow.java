@@ -5,6 +5,7 @@
 package hangman.ui;
 
 import hangman.model.HangMan;
+import hangman.ui.ArrayWordGenerator;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -13,6 +14,7 @@ import javax.swing.JOptionPane;
  *
  * @author mateo.alfayafontan
  */
+
 public class MainWindow extends javax.swing.JFrame {
 
     private HangMan hangMan;
@@ -73,7 +75,7 @@ public class MainWindow extends javax.swing.JFrame {
         tryCharText = new javax.swing.JTextField();
         tryButton = new javax.swing.JButton();
         showFailsLabel = new javax.swing.JLabel();
-        showHiddenWorddLabel = new javax.swing.JLabel();
+        showHiddenWordLabel = new javax.swing.JLabel();
         rightPanel = new javax.swing.JPanel();
         firstLabel = new javax.swing.JLabel();
         oneFailLabel = new javax.swing.JLabel();
@@ -178,9 +180,9 @@ public class MainWindow extends javax.swing.JFrame {
         gridBagConstraints.gridy = 1;
         leftPanel.add(showFailsLabel, gridBagConstraints);
 
-        showHiddenWorddLabel.setForeground(new java.awt.Color(0, 0, 0));
-        showHiddenWorddLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        leftPanel.add(showHiddenWorddLabel, new java.awt.GridBagConstraints());
+        showHiddenWordLabel.setForeground(new java.awt.Color(0, 0, 0));
+        showHiddenWordLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        leftPanel.add(showHiddenWordLabel, new java.awt.GridBagConstraints());
 
         getContentPane().add(leftPanel, java.awt.BorderLayout.CENTER);
 
@@ -229,50 +231,59 @@ public class MainWindow extends javax.swing.JFrame {
             "Dous xogadores, un xera a palabra e o outro adiviña"
         };
 
-        JOptionPane.showInputDialog(bottomPanel, "Seleccione un modo de xogo", "Modo de xogo", HEIGHT, null, option, option[0]);
+        String selectedMode = (String) JOptionPane.showInputDialog(bottomPanel, "Seleccione un modo de xogo", "Modo de xogo", HEIGHT, null, option, option[0]);
+        ArrayWordGenerator wordGenerator = new ArrayWordGenerator();
         if (option != null) {
-            if (option.equals(option[0])) {
-                
+            if (selectedMode.equals(option[0])) {
+                wordGenerator = new ArrayWordGenerator();
+                showGameStatus();
             } else {
-                
+
             }
         }
+        
+}
+    
+        private void showGameStatus() {
+        showHiddenWordLabel.setText(hangMan.getHiddenWord().show());
+        showFailsLabel.setText(hangMan.getStringFails());
+
     }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+    /* Set the Nimbus look and feel */
+    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+     */
+    try {
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                break;
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainWindow().setVisible(true);
-            }
-        });
+    } catch (ClassNotFoundException ex) {
+        java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (InstantiationException ex) {
+        java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (IllegalAccessException ex) {
+        java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     }
+    //</editor-fold>
+
+    /* Create and display the form */
+    java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+            new MainWindow().setVisible(true);
+        }
+    });
+}
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -288,7 +299,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel oneFailLabel;
     private javax.swing.JPanel rightPanel;
     private javax.swing.JLabel showFailsLabel;
-    private javax.swing.JLabel showHiddenWorddLabel;
+    private javax.swing.JLabel showHiddenWordLabel;
     private javax.swing.JLabel sixFailsLabel;
     private javax.swing.JLabel threeFailsLabel;
     private javax.swing.JLabel titleLabel;
