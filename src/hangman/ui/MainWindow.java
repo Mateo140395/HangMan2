@@ -14,7 +14,6 @@ import javax.swing.JOptionPane;
  *
  * @author mateo.alfayafontan
  */
-
 public class MainWindow extends javax.swing.JFrame {
 
     private HangMan hangMan;
@@ -50,6 +49,8 @@ public class MainWindow extends javax.swing.JFrame {
         hangManLabels.add(fourFailsLabel);
         hangManLabels.add(fiveFailsLabel);
         hangManLabels.add(sixFailsLabel);
+        tryCharText.setVisible(false);
+        tryButton.setVisible(false);
 
     }
 
@@ -72,10 +73,10 @@ public class MainWindow extends javax.swing.JFrame {
         hiddenWordLabel = new javax.swing.JLabel();
         failsLabel = new javax.swing.JLabel();
         tryCharLabel = new javax.swing.JLabel();
-        tryCharText = new javax.swing.JTextField();
         tryButton = new javax.swing.JButton();
         showFailsLabel = new javax.swing.JLabel();
         showHiddenWordLabel = new javax.swing.JLabel();
+        tryCharText = new javax.swing.JTextField();
         rightPanel = new javax.swing.JPanel();
         firstLabel = new javax.swing.JLabel();
         oneFailLabel = new javax.swing.JLabel();
@@ -149,28 +150,17 @@ public class MainWindow extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         leftPanel.add(tryCharLabel, gridBagConstraints);
 
-        tryCharText.setBackground(new java.awt.Color(255, 255, 255));
-        tryCharText.setForeground(new java.awt.Color(0, 0, 0));
-        tryCharText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tryCharText.setOpaque(false);
-        tryCharText.setPreferredSize(new java.awt.Dimension(50, 23));
-        tryCharText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tryCharTextActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 3;
-        leftPanel.add(tryCharText, gridBagConstraints);
-
         tryButton.setBackground(new java.awt.Color(255, 255, 255));
         tryButton.setForeground(new java.awt.Color(0, 0, 0));
         tryButton.setText("Probar");
         tryButton.setOpaque(false);
+        tryButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tryButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
         leftPanel.add(tryButton, gridBagConstraints);
 
@@ -183,6 +173,15 @@ public class MainWindow extends javax.swing.JFrame {
         showHiddenWordLabel.setForeground(new java.awt.Color(0, 0, 0));
         showHiddenWordLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         leftPanel.add(showHiddenWordLabel, new java.awt.GridBagConstraints());
+
+        tryCharText.setBackground(new java.awt.Color(255, 255, 255));
+        tryCharText.setForeground(new java.awt.Color(0, 0, 0));
+        tryCharText.setMinimumSize(new java.awt.Dimension(60, 23));
+        tryCharText.setPreferredSize(new java.awt.Dimension(60, 23));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        leftPanel.add(tryCharText, gridBagConstraints);
 
         getContentPane().add(leftPanel, java.awt.BorderLayout.CENTER);
 
@@ -221,9 +220,12 @@ public class MainWindow extends javax.swing.JFrame {
         startNewGame();
     }//GEN-LAST:event_newGameButtonActionPerformed
 
-    private void tryCharTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tryCharTextActionPerformed
+    private void tryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tryButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tryCharTextActionPerformed
+        if (!hangMan.isGameOver()) {
+            tryChar();
+        }
+    }//GEN-LAST:event_tryButtonActionPerformed
 
     private void startNewGame() {
         String[] option = new String[]{
@@ -236,54 +238,116 @@ public class MainWindow extends javax.swing.JFrame {
         if (option != null) {
             if (selectedMode.equals(option[0])) {
                 wordGenerator = new ArrayWordGenerator();
-                showGameStatus();
+                try {
+                    hangMan = new HangMan(wordGenerator.generateWord());
+                    
+                    hangMan.getFails().clear();
+                    hangMan.getTried().clear();
+                    oneFailLabel.setVisible(false);
+                    twoFailsLabel.setVisible(false);
+                    threeFailsLabel.setVisible(false);
+                    fourFailsLabel.setVisible(false);
+                    fiveFailsLabel.setVisible(false);
+                    sixFailsLabel.setVisible(false);
+                    
+                    showGameStatus();
+                } catch (GenerateWordException e) {
+                    JOptionPane.showMessageDialog(this, "Erro ao xerar a palabra: " + e.getMessage());
+                }
             } else {
 
             }
         }
-        
-}
-    
-        private void showGameStatus() {
+
+    }
+
+    private void showGameStatus() {
         showHiddenWordLabel.setText(hangMan.getHiddenWord().show());
         showFailsLabel.setText(hangMan.getStringFails());
+        tryCharText.setVisible(true);
+        tryButton.setVisible(true);
 
+        switch (hangMan.getFails().size()) {
+            case 1:
+                oneFailLabel.setVisible(true);
+                break;
+            case 2:
+                twoFailsLabel.setVisible(true);
+                break;
+            case 3:
+                threeFailsLabel.setVisible(true);
+                break;
+            case 4:
+                fourFailsLabel.setVisible(true);
+                break;
+            case 5:
+                fiveFailsLabel.setVisible(true);
+                break;
+            case 6:
+                sixFailsLabel.setVisible(true);
+                break;
+        }
+        if (hangMan.isGameOver()) {
+            if (hangMan.maxFailsExceeded()) {
+                JOptionPane.showMessageDialog(bottomPanel, "Perdeches. A palabra era: " + hangMan.showFullWord());
+            } else {
+                JOptionPane.showMessageDialog(bottomPanel, "Gañaches. A palabra era: " + hangMan.showFullWord());
+            }
+        }
+    }
+
+    private void tryChar() {
+        int maxChars = tryCharText.getText().length();
+
+        if (maxChars == 1) {
+            if (hangMan.getTried().contains(tryCharText.getText().charAt(0))) {
+                JOptionPane.showMessageDialog(bottomPanel, "O caracter xa foi introducido");
+            } else {
+                hangMan.tryChar(tryCharText.getText().charAt(0));
+            }
+        } else if (maxChars == 0) {
+            JOptionPane.showMessageDialog(bottomPanel, "Debe escribir un caracter");
+        } else {
+            JOptionPane.showMessageDialog(bottomPanel, "Probe so un caracter de cada vez");
+        }
+        showGameStatus();
+        tryCharText.setText("");
     }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-    /* Set the Nimbus look and feel */
-    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-     */
-    try {
-        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-            if ("Nimbus".equals(info.getName())) {
-                javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                break;
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
             }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-    } catch (ClassNotFoundException ex) {
-        java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (InstantiationException ex) {
-        java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (IllegalAccessException ex) {
-        java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-        java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    }
-    //</editor-fold>
+        //</editor-fold>
 
-    /* Create and display the form */
-    java.awt.EventQueue.invokeLater(new Runnable() {
-        public void run() {
-            new MainWindow().setVisible(true);
-        }
-    });
-}
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MainWindow().setVisible(true);
+            }
+        });
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

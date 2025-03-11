@@ -7,10 +7,13 @@ package hangman.model;
 import java.util.ArrayList;
 
 /**
- *Clase que implementa métodos relativos á comprobación de fallos e acertos da palabra
+ * Clase que implementa métodos relativos á comprobación de fallos e acertos da
+ * palabra
+ *
  * @author Mateo
  */
 public class HangMan {
+
     /**
      * Constante que almacena o máximo de fallos
      */
@@ -20,18 +23,31 @@ public class HangMan {
     //Array dinámico que almacenará os caracteres fallados
     private ArrayList<Character> fails;
 
+    private ArrayList<Character> tried;
+
     /**
      * Constructor que recibe a palabra e a asigna na instancia de Hiddenword
-     * @param guessword 
+     *
+     * @param guessword
      */
     public HangMan(String guessword) {
         this.hiddenWord = new HiddenWord(guessword);
         this.fails = new ArrayList<>();
+        this.tried = new ArrayList<>();
+    }
+
+    public ArrayList<Character> getTried() {
+        return tried;
+    }
+
+    public void setTried(ArrayList<Character> tried) {
+        this.tried = tried;
     }
 
     /**
      * Recuperamos a palabra oculta
-     * @return 
+     *
+     * @return
      */
     public HiddenWord getHiddenWord() {
         return hiddenWord;
@@ -39,7 +55,8 @@ public class HangMan {
 
     /**
      * Modificamos a palabra oculta
-     * @param hiddenWord 
+     *
+     * @param hiddenWord
      */
     public void setHiddenWord(HiddenWord hiddenWord) {
         this.hiddenWord = hiddenWord;
@@ -47,15 +64,17 @@ public class HangMan {
 
     /**
      * Recuperamos os fallos
-     * @return 
+     *
+     * @return
      */
     public ArrayList<Character> getFails() {
         return fails;
     }
-    
+
     /**
      * Método que devolve os fallos acumulados
-     * @return 
+     *
+     * @return
      */
     public String getStringFails() {
         String stringfails = "";
@@ -64,47 +83,55 @@ public class HangMan {
         }
         return stringfails;
     }
-    
+
     /**
-     * Referencia a método doutra clase que devolve a palabra con guións no lugar dos fallos
-     * @return 
+     * Referencia a método doutra clase que devolve a palabra con guións no
+     * lugar dos fallos
+     *
+     * @return
      */
     public String showHiddenWord() {
         return hiddenWord.show();
     }
-    
+
     /**
-     * Referencia a método doutra clase que devolve a palabra  oculta completa
-     * @return 
+     * Referencia a método doutra clase que devolve a palabra oculta completa
+     *
+     * @return
      */
     public String showFullWord() {
         return hiddenWord.showFullWord();
     }
-    
+
     /**
      * Referencia a método doutra clase que comproba caracteres. Agora ademáis
      * engade os caracteres a comprobar nos fallos se procede
-     * @param c 
+     *
+     * @param c
      */
     public void tryChar(char c) {
         if (!hiddenWord.checkChar(c)) {
             fails.add(c);
         }
+        tried.add(c);
     }
-    
+
     /**
-     * Comprobación da terminación da partida. Ben por palabra descuberta ou fallos excedidos
-     * @return 
+     * Comprobación da terminación da partida. Ben por palabra descuberta ou
+     * fallos excedidos
+     *
+     * @return
      */
     public boolean isGameOver() {
-        return maxFailsExceeded()||hiddenWord.isVisible();
+        return maxFailsExceeded() || hiddenWord.isVisible();
     }
-    
+
     /**
      * Comproba se se excedeu o límite de fallos
-     * @return 
+     *
+     * @return
      */
-    public boolean maxFailsExceeded(){
-        return fails.size()==MAX_FAILS;
+    public boolean maxFailsExceeded() {
+        return fails.size() == MAX_FAILS;
     }
 }
