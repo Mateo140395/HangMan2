@@ -108,6 +108,11 @@ public class MainWindow extends javax.swing.JFrame {
         exitButton.setText("Saír");
         exitButton.setMaximumSize(new java.awt.Dimension(100, 100));
         exitButton.setPreferredSize(new java.awt.Dimension(80, 30));
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitButtonActionPerformed(evt);
+            }
+        });
         bottomPanel.add(exitButton);
 
         getContentPane().add(bottomPanel, java.awt.BorderLayout.SOUTH);
@@ -227,6 +232,11 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tryButtonActionPerformed
 
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_exitButtonActionPerformed
+
     private void startNewGame() {
         String[] option = new String[]{
             "Un xogador, xerando a palabra ao azar",
@@ -240,7 +250,7 @@ public class MainWindow extends javax.swing.JFrame {
                 wordGenerator = new ArrayWordGenerator();
                 try {
                     hangMan = new HangMan(wordGenerator.generateWord());
-                    
+
                     hangMan.getFails().clear();
                     hangMan.getTried().clear();
                     oneFailLabel.setVisible(false);
@@ -249,7 +259,7 @@ public class MainWindow extends javax.swing.JFrame {
                     fourFailsLabel.setVisible(false);
                     fiveFailsLabel.setVisible(false);
                     sixFailsLabel.setVisible(false);
-                    
+
                     showGameStatus();
                 } catch (GenerateWordException e) {
                     JOptionPane.showMessageDialog(this, "Erro ao xerar a palabra: " + e.getMessage());
@@ -293,24 +303,26 @@ public class MainWindow extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(bottomPanel, "Gañaches. A palabra era: " + hangMan.showFullWord());
             }
+            tryCharText.setVisible(false);
+            tryButton.setVisible(false);
         }
     }
 
     private void tryChar() {
-        int maxChars = tryCharText.getText().length();
+        if (tryCharText.getText().substring(0).matches("[a-z]")) {
+            int maxChars = tryCharText.getText().length();
 
-        if (maxChars == 1) {
-            if (hangMan.getTried().contains(tryCharText.getText().charAt(0))) {
-                JOptionPane.showMessageDialog(bottomPanel, "O caracter xa foi introducido");
-            } else {
-                hangMan.tryChar(tryCharText.getText().charAt(0));
+            if (maxChars >= 1) {
+                if (hangMan.getTried().contains(tryCharText.getText().charAt(0))) {
+                    JOptionPane.showMessageDialog(bottomPanel, "O caracter '" + tryCharText.getText().charAt(0)+ "' xa foi introducido");
+                } else {
+                    hangMan.tryChar(tryCharText.getText().charAt(0));
+                }
             }
-        } else if (maxChars == 0) {
-            JOptionPane.showMessageDialog(bottomPanel, "Debe escribir un caracter");
+            showGameStatus();
         } else {
-            JOptionPane.showMessageDialog(bottomPanel, "Probe so un caracter de cada vez");
+            JOptionPane.showMessageDialog(bottomPanel, "Debe ecribir polo menos un caracter. A palabra so contén letras entre a e z en minúscula");
         }
-        showGameStatus();
         tryCharText.setText("");
     }
 
