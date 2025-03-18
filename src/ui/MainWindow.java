@@ -201,15 +201,25 @@ public class MainWindow extends javax.swing.JFrame {
         rightPanel.setBackground(new java.awt.Color(153, 153, 153));
         rightPanel.setLayout(new java.awt.CardLayout());
 
-        firstLabel.setIcon(new javax.swing.ImageIcon("/home/xaquin.alvesgonzalez/Documentos/Asignaturas1/PRO/HangManCompartido/HangMan/Images/Hangman-0.png")); // NOI18N
+        firstLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/Hangman-0.png"))); // NOI18N
         rightPanel.add(firstLabel, "card2");
 
         oneFailLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/Hangman-1.png"))); // NOI18N
         rightPanel.add(oneFailLabel, "card3");
+
+        twoFailsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/Hangman-2.png"))); // NOI18N
         rightPanel.add(twoFailsLabel, "card4");
+
+        threeFailsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/Hangman-3.png"))); // NOI18N
         rightPanel.add(threeFailsLabel, "card5");
+
+        fourFailsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/Hangman-4.png"))); // NOI18N
         rightPanel.add(fourFailsLabel, "card6");
+
+        fiveFailsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/Hangman-5.png"))); // NOI18N
         rightPanel.add(fiveFailsLabel, "card7");
+
+        sixFailsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/Hangman-6.png"))); // NOI18N
         rightPanel.add(sixFailsLabel, "card8");
 
         getContentPane().add(rightPanel, java.awt.BorderLayout.EAST);
