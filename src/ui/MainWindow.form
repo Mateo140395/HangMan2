@@ -262,7 +262,7 @@
         <Component class="javax.swing.JLabel" name="firstLabel">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/mateo.alfayafontan/NetBeansProjects/HangMan/Images/Hangman-0.png"/>
+              <Image iconType="2" name="/home/xaquin.alvesgonzalez/Documentos/Asignaturas1/PRO/HangManCompartido/HangMan/Images/Hangman-0.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -274,7 +274,7 @@
         <Component class="javax.swing.JLabel" name="oneFailLabel">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/mateo.alfayafontan/NetBeansProjects/HangMan/Images/Hangman-1.png"/>
+              <Image iconType="3" name="/ui/Hangman-1.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -284,11 +284,6 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="twoFailsLabel">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/mateo.alfayafontan/NetBeansProjects/HangMan/Images/Hangman-2.png"/>
-            </Property>
-          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
               <CardConstraints cardName="card4"/>
@@ -296,11 +291,6 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="threeFailsLabel">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/mateo.alfayafontan/NetBeansProjects/HangMan/Images/Hangman-3.png"/>
-            </Property>
-          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
               <CardConstraints cardName="card5"/>
@@ -308,11 +298,6 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="fourFailsLabel">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/mateo.alfayafontan/NetBeansProjects/HangMan/Images/Hangman-4.png"/>
-            </Property>
-          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
               <CardConstraints cardName="card6"/>
@@ -320,11 +305,6 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="fiveFailsLabel">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/mateo.alfayafontan/NetBeansProjects/HangMan/Images/Hangman-5.png"/>
-            </Property>
-          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
               <CardConstraints cardName="card7"/>
@@ -332,11 +312,6 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="sixFailsLabel">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/mateo.alfayafontan/NetBeansProjects/HangMan/Images/Hangman-6.png"/>
-            </Property>
-          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
               <CardConstraints cardName="card8"/>
