@@ -2,13 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package hangman.ui;
+package ui;
 
 import hangman.model.HangMan;
-import hangman.ui.ArrayWordGenerator;
+import hangman.ui.GenerateWordException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import ui.GUIKeyboardWordgenerator;
 
 /**
  *
@@ -49,8 +52,8 @@ public class MainWindow extends javax.swing.JFrame {
         hangManLabels.add(fourFailsLabel);
         hangManLabels.add(fiveFailsLabel);
         hangManLabels.add(sixFailsLabel);
-        tryCharText.setVisible(false);
-        tryButton.setVisible(false);
+        tryCharText.setEnabled(false);
+        tryButton.setEnabled(false);
 
     }
 
@@ -183,6 +186,11 @@ public class MainWindow extends javax.swing.JFrame {
         tryCharText.setForeground(new java.awt.Color(0, 0, 0));
         tryCharText.setMinimumSize(new java.awt.Dimension(60, 23));
         tryCharText.setPreferredSize(new java.awt.Dimension(60, 23));
+        tryCharText.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tryCharTextKeyTyped(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -221,8 +229,12 @@ public class MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
-        // TODO add your handling code here:
-        startNewGame();
+        try {
+            // TODO add your handling code here:
+            startNewGame();
+        } catch (GenerateWordException ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_newGameButtonActionPerformed
 
     private void tryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tryButtonActionPerformed
@@ -237,35 +249,36 @@ public class MainWindow extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitButtonActionPerformed
 
-    private void startNewGame() {
+    private void tryCharTextKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tryCharTextKeyTyped
+        // TODO add your handling code here:
+        if (evt.getKeyChar() == evt.VK_ENTER) {
+            tryButton.doClick();
+        }
+    }//GEN-LAST:event_tryCharTextKeyTyped
+
+    private void startNewGame() throws GenerateWordException {
         String[] option = new String[]{
             "Un xogador, xerando a palabra ao azar",
             "Dous xogadores, un xera a palabra e o outro adiviña"
         };
 
         String selectedMode = (String) JOptionPane.showInputDialog(bottomPanel, "Seleccione un modo de xogo", "Modo de xogo", HEIGHT, null, option, option[0]);
-        ArrayWordGenerator wordGenerator = new ArrayWordGenerator();
         if (option != null) {
             if (selectedMode.equals(option[0])) {
-                wordGenerator = new ArrayWordGenerator();
                 try {
+                    ArrayWordGenerator wordGenerator = new ArrayWordGenerator();
                     hangMan = new HangMan(wordGenerator.generateWord());
 
-                    hangMan.getFails().clear();
-                    hangMan.getTried().clear();
-                    oneFailLabel.setVisible(false);
-                    twoFailsLabel.setVisible(false);
-                    threeFailsLabel.setVisible(false);
-                    fourFailsLabel.setVisible(false);
-                    fiveFailsLabel.setVisible(false);
-                    sixFailsLabel.setVisible(false);
+                    initialStatus();
 
-                    showGameStatus();
                 } catch (GenerateWordException e) {
                     JOptionPane.showMessageDialog(this, "Erro ao xerar a palabra: " + e.getMessage());
                 }
             } else {
+                GUIKeyboardWordgenerator kWordGenerator = new GUIKeyboardWordgenerator();
+                hangMan = new HangMan(kWordGenerator.generateWord());
 
+                initialStatus();
             }
         }
 
@@ -274,8 +287,6 @@ public class MainWindow extends javax.swing.JFrame {
     private void showGameStatus() {
         showHiddenWordLabel.setText(hangMan.getHiddenWord().show());
         showFailsLabel.setText(hangMan.getStringFails());
-        tryCharText.setVisible(true);
-        tryButton.setVisible(true);
 
         switch (hangMan.getFails().size()) {
             case 1:
@@ -303,27 +314,44 @@ public class MainWindow extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(bottomPanel, "Gañaches. A palabra era: " + hangMan.showFullWord());
             }
-            tryCharText.setVisible(false);
-            tryButton.setVisible(false);
+            tryCharText.setEnabled(false);
+            tryButton.setEnabled(false);
         }
     }
 
     private void tryChar() {
-        if (tryCharText.getText().substring(0).matches("[a-z]")) {
+        if (tryCharText.getText().matches("[a-z]+")) {
             int maxChars = tryCharText.getText().length();
 
             if (maxChars >= 1) {
                 if (hangMan.getTried().contains(tryCharText.getText().charAt(0))) {
-                    JOptionPane.showMessageDialog(bottomPanel, "O caracter '" + tryCharText.getText().charAt(0)+ "' xa foi introducido");
+                    JOptionPane.showMessageDialog(bottomPanel, "O caracter '" + tryCharText.getText().charAt(0) + "' xa foi introducido");
                 } else {
                     hangMan.tryChar(tryCharText.getText().charAt(0));
                 }
             }
+            tryCharText.requestFocus();
             showGameStatus();
         } else {
             JOptionPane.showMessageDialog(bottomPanel, "Debe ecribir polo menos un caracter. A palabra so contén letras entre a e z en minúscula");
         }
         tryCharText.setText("");
+    }
+
+    private void initialStatus() {
+        hangMan.getFails().clear();
+        hangMan.getTried().clear();
+        oneFailLabel.setVisible(false);
+        twoFailsLabel.setVisible(false);
+        threeFailsLabel.setVisible(false);
+        fourFailsLabel.setVisible(false);
+        fiveFailsLabel.setVisible(false);
+        sixFailsLabel.setVisible(false);
+
+        showGameStatus();
+        tryCharText.setEnabled(true);
+        tryButton.setEnabled(true);
+        tryCharText.requestFocus();
     }
 
     /**

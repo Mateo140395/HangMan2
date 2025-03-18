@@ -5,7 +5,7 @@
 package hangman.ui;
 
 import hangman.model.HangMan;
-import hangman.ui.ArrayWordGenerator;
+import ui.ArrayWordGenerator;
 import hangman.ui.GenerateWordException;
 import hangman.ui.KeyboardWordGenerator;
 import hangman.ui.WordGenerator;
