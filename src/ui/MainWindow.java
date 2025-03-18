@@ -204,7 +204,7 @@ public class MainWindow extends javax.swing.JFrame {
         firstLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/Hangman-0.png"))); // NOI18N
         rightPanel.add(firstLabel, "card2");
 
-        oneFailLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/Hangman-1.png"))); // NOI18N
+        oneFailLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/Hangman-1.png"))); // NOI18N
         rightPanel.add(oneFailLabel, "card3");
 
         twoFailsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/Hangman-2.png"))); // NOI18N
