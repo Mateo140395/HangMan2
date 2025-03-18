@@ -229,12 +229,9 @@ public class MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
-        try {
-            // TODO add your handling code here:
-            startNewGame();
-        } catch (GenerateWordException ex) {
-            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        // TODO add your handling code here:
+        startNewGame();
+
     }//GEN-LAST:event_newGameButtonActionPerformed
 
     private void tryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tryButtonActionPerformed
@@ -256,7 +253,7 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tryCharTextKeyTyped
 
-    private void startNewGame() throws GenerateWordException {
+    private void startNewGame() {
         String[] option = new String[]{
             "Un xogador, xerando a palabra ao azar",
             "Dous xogadores, un xera a palabra e o outro adiviña"
@@ -264,21 +261,22 @@ public class MainWindow extends javax.swing.JFrame {
 
         String selectedMode = (String) JOptionPane.showInputDialog(bottomPanel, "Seleccione un modo de xogo", "Modo de xogo", HEIGHT, null, option, option[0]);
         if (option != null) {
-            if (selectedMode.equals(option[0])) {
-                try {
+            try {
+                if (selectedMode.equals(option[0])) {
+
                     ArrayWordGenerator wordGenerator = new ArrayWordGenerator();
                     hangMan = new HangMan(wordGenerator.generateWord());
 
                     initialStatus();
 
-                } catch (GenerateWordException e) {
-                    JOptionPane.showMessageDialog(this, "Erro ao xerar a palabra: " + e.getMessage());
-                }
-            } else {
-                GUIKeyboardWordgenerator kWordGenerator = new GUIKeyboardWordgenerator();
-                hangMan = new HangMan(kWordGenerator.generateWord());
+                } else {
+                    GUIKeyboardWordgenerator kWordGenerator = new GUIKeyboardWordgenerator();
+                    hangMan = new HangMan(kWordGenerator.generateWord());
 
-                initialStatus();
+                    initialStatus();
+                }
+            } catch (GenerateWordException e) {
+                JOptionPane.showMessageDialog(this, "Erro ao xerar a palabra: " + e.getMessage());
             }
         }
 
@@ -341,12 +339,10 @@ public class MainWindow extends javax.swing.JFrame {
     private void initialStatus() {
         hangMan.getFails().clear();
         hangMan.getTried().clear();
-        oneFailLabel.setVisible(false);
-        twoFailsLabel.setVisible(false);
-        threeFailsLabel.setVisible(false);
-        fourFailsLabel.setVisible(false);
-        fiveFailsLabel.setVisible(false);
-        sixFailsLabel.setVisible(false);
+
+        for (int i = 1; i < hangManLabels.size(); i++) {
+            hangManLabels.get(i).setVisible(false);
+        }
 
         showGameStatus();
         tryCharText.setEnabled(true);
