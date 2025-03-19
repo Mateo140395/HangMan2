@@ -297,7 +297,7 @@ public class MainWindow extends javax.swing.JFrame {
         };
         //Crea un cadro de diálogo con dúas opcións e a primeira preseleccionada
         String selectedMode = (String) JOptionPane.showInputDialog(bottomPanel, "Seleccione un modo de xogo", "Modo de xogo", HEIGHT, null, option, option[0]);
-        if (option != null) {
+        if (selectedMode != null) {
             try {
                 if (selectedMode.equals(option[0])) {
 
@@ -313,7 +313,7 @@ public class MainWindow extends javax.swing.JFrame {
                     initialStatus();
                 }
             } catch (GenerateWordException e) {
-                JOptionPane.showMessageDialog(this, "Erro ao xerar a palabra: " + e.getMessage());
+                System.out.println(e.getMessage());
             }
         }
 
