@@ -14,15 +14,13 @@ import java.util.ArrayList;
  */
 public class HangMan {
 
-    /**
-     * Constante que almacena o máximo de fallos
-     */
+    //Constante que almacena o máximo de fallos
     public final static int MAX_FAILS = 6;
     //Nova instancia da clase Hiddenword
     private HiddenWord hiddenWord;
     //Array dinámico que almacenará os caracteres fallados
     private ArrayList<Character> fails;
-
+    //Array dinámico para comprobar se xa intentou un caracter
     private ArrayList<Character> tried;
 
     /**
@@ -35,11 +33,17 @@ public class HangMan {
         this.fails = new ArrayList<>();
         this.tried = new ArrayList<>();
     }
-
+    /**
+     * Recuperamos os intentos
+     * @return 
+     */
     public ArrayList<Character> getTried() {
         return tried;
     }
-
+    /**
+     * Modificamos os intentos
+     * @param tried 
+     */
     public void setTried(ArrayList<Character> tried) {
         this.tried = tried;
     }
@@ -77,6 +81,7 @@ public class HangMan {
      * @return
      */
     public String getStringFails() {
+        //Inicializa un texto vacío e vaino enchendo segundo aumentan os fallos
         String stringfails = "";
         for (int i = 0; i < fails.size(); i++) {
             stringfails += fails.get(i) + " ";
@@ -110,6 +115,7 @@ public class HangMan {
      * @param c
      */
     public void tryChar(char c) {
+        //Se a palabra non inclúe o caracter engádeo á lista de fallos. Tanto se o inclúe como se non engadeo á lista de caracteres probados
         if (!hiddenWord.checkChar(c)) {
             fails.add(c);
         }

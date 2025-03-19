@@ -5,11 +5,15 @@
 package hangman.ui;
 
 /**
- *
+ *Interfaz cun método abstracto para a xeración de palabras
  * @author Mateo
  */
 public interface WordGenerator {
-
+    /**
+     * Método sen implementar para xerar as palabras
+     * @return
+     * @throws GenerateWordException 
+     */
     public String generateWord() throws GenerateWordException;
 
 }

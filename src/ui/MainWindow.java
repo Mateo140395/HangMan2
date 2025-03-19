@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import ui.GUIKeyboardWordgenerator;
 
 /**
+ * Clase principal coa interfaz gráfica do xogo
  *
  * @author mateo.alfayafontan
  */
@@ -22,18 +23,38 @@ public class MainWindow extends javax.swing.JFrame {
     private HangMan hangMan;
     private ArrayList<JLabel> hangManLabels;
 
+    /**
+     * Recibimos o valor do atributo hangman
+     *
+     * @return
+     */
     public HangMan getHangMan() {
         return hangMan;
     }
 
+    /**
+     * Devolvemos o valor do atributo hangman
+     *
+     * @param hangMan
+     */
     public void setHangMan(HangMan hangMan) {
         this.hangMan = hangMan;
     }
 
+    /**
+     * Recibimos o valor das etiquetas de imaxe
+     *
+     * @return
+     */
     public ArrayList<JLabel> getHangManLabels() {
         return hangManLabels;
     }
 
+    /**
+     * Devolvemos o valor das etiquetas de imaxe
+     *
+     * @param hangManLabels
+     */
     public void setHangManLabels(ArrayList<JLabel> hangManLabels) {
         this.hangManLabels = hangManLabels;
     }
@@ -45,6 +66,7 @@ public class MainWindow extends javax.swing.JFrame {
         setTitle("O aforcado");
         initComponents();
         this.hangManLabels = new ArrayList();
+        //Ao array engadimos as etiquetas que conteñen as imaxes e deshabilitamos o botón de probar e o cadro de texto
         hangManLabels.add(firstLabel);
         hangManLabels.add(oneFailLabel);
         hangManLabels.add(twoFailsLabel);
@@ -201,25 +223,25 @@ public class MainWindow extends javax.swing.JFrame {
         rightPanel.setBackground(new java.awt.Color(153, 153, 153));
         rightPanel.setLayout(new java.awt.CardLayout());
 
-        firstLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/Hangman-0.png"))); // NOI18N
+        firstLabel.setIcon(new javax.swing.ImageIcon("/home/mateo.alfayafontan/NetBeansProjects/HangMan/Images/Hangman-0.png")); // NOI18N
         rightPanel.add(firstLabel, "card2");
 
-        oneFailLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/Hangman-1.png"))); // NOI18N
+        oneFailLabel.setIcon(new javax.swing.ImageIcon("/home/mateo.alfayafontan/NetBeansProjects/HangMan/Images/Hangman-1.png")); // NOI18N
         rightPanel.add(oneFailLabel, "card3");
 
-        twoFailsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/Hangman-2.png"))); // NOI18N
+        twoFailsLabel.setIcon(new javax.swing.ImageIcon("/home/mateo.alfayafontan/NetBeansProjects/HangMan/Images/Hangman-2.png")); // NOI18N
         rightPanel.add(twoFailsLabel, "card4");
 
-        threeFailsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/Hangman-3.png"))); // NOI18N
+        threeFailsLabel.setIcon(new javax.swing.ImageIcon("/home/mateo.alfayafontan/NetBeansProjects/HangMan/Images/Hangman-3.png")); // NOI18N
         rightPanel.add(threeFailsLabel, "card5");
 
-        fourFailsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/Hangman-4.png"))); // NOI18N
+        fourFailsLabel.setIcon(new javax.swing.ImageIcon("/home/mateo.alfayafontan/NetBeansProjects/HangMan/Images/Hangman-4.png")); // NOI18N
         rightPanel.add(fourFailsLabel, "card6");
 
-        fiveFailsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/Hangman-5.png"))); // NOI18N
+        fiveFailsLabel.setIcon(new javax.swing.ImageIcon("/home/mateo.alfayafontan/NetBeansProjects/HangMan/Images/Hangman-5.png")); // NOI18N
         rightPanel.add(fiveFailsLabel, "card7");
 
-        sixFailsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/images/Hangman-6.png"))); // NOI18N
+        sixFailsLabel.setIcon(new javax.swing.ImageIcon("/home/mateo.alfayafontan/NetBeansProjects/HangMan/Images/Hangman-6.png")); // NOI18N
         rightPanel.add(sixFailsLabel, "card8");
 
         getContentPane().add(rightPanel, java.awt.BorderLayout.EAST);
@@ -227,38 +249,53 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Cando se pulsa o botón da a escoller o modo de xogo
+     *
+     * @param evt
+     */
     private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
-        // TODO add your handling code here:
         startNewGame();
 
     }//GEN-LAST:event_newGameButtonActionPerformed
-
+    /**
+     * Ao pulsar o botón próbase o caracter introducido
+     *
+     * @param evt
+     */
     private void tryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tryButtonActionPerformed
-        // TODO add your handling code here:
         if (!hangMan.isGameOver()) {
             tryChar();
         }
     }//GEN-LAST:event_tryButtonActionPerformed
+    /**
+     * Pecha o programa
+     *
+     */
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_exitButtonActionPerformed
-
+    /**
+     * Se se pulsa a tecla enter execútase a mesma acción que usar o botón de
+     * probar
+     *
+     * @param evt
+     */
     private void tryCharTextKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tryCharTextKeyTyped
-        // TODO add your handling code here:
         if (evt.getKeyChar() == evt.VK_ENTER) {
             tryButton.doClick();
         }
     }//GEN-LAST:event_tryCharTextKeyTyped
-
+    /**
+     * Comeza a partida dando a escoller o modo de xogo
+     */
     private void startNewGame() {
         String[] option = new String[]{
             "Un xogador, xerando a palabra ao azar",
             "Dous xogadores, un xera a palabra e o outro adiviña"
         };
-
+        //Crea un cadro de diálogo con dúas opcións e a primeira preseleccionada
         String selectedMode = (String) JOptionPane.showInputDialog(bottomPanel, "Seleccione un modo de xogo", "Modo de xogo", HEIGHT, null, option, option[0]);
         if (option != null) {
             try {
@@ -282,6 +319,9 @@ public class MainWindow extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Amosa o estado actual do xogo
+     */
     private void showGameStatus() {
         showHiddenWordLabel.setText(hangMan.getHiddenWord().show());
         showFailsLabel.setText(hangMan.getStringFails());
@@ -317,6 +357,10 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Comproba que o caracter introducido sexa válido, de lonxitude suficiente
+     * e non se probase xa. Despois combroba se a palabra o inclúe
+     */
     private void tryChar() {
         if (tryCharText.getText().matches("[a-z]+")) {
             int maxChars = tryCharText.getText().length();
@@ -336,6 +380,9 @@ public class MainWindow extends javax.swing.JFrame {
         tryCharText.setText("");
     }
 
+    /**
+     * Método privado para o estado inicial do xogo
+     */
     private void initialStatus() {
         hangMan.getFails().clear();
         hangMan.getTried().clear();

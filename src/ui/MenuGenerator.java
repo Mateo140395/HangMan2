@@ -2,12 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package hangman.ui;
+package ui;
 
 import hangman.model.HangMan;
 import ui.ArrayWordGenerator;
 import hangman.ui.GenerateWordException;
+import hangman.ui.GenerateWordException;
 import hangman.ui.KeyboardWordGenerator;
+import hangman.ui.KeyboardWordGenerator;
+import hangman.ui.WordGenerator;
 import hangman.ui.WordGenerator;
 import java.util.Scanner;
 
@@ -42,13 +45,14 @@ public class MenuGenerator {
     }
 
     /**
-     * Polo momento o método so chama ao método generateWord doutra clase.
+     * Menú principal en consola
      *
      * @return
      */
     private String showInitMenu() throws GenerateWordException {
         WordGenerator wordGenerator = null;
         int option=0;
+        //Mentres o usuario non introduza unha opción válida sigue mostrando o mení
         do {
             Scanner scan = new Scanner(System.in);
             System.out.println("Benvido. Escolla o modo de xogo:");
@@ -103,7 +107,7 @@ public class MenuGenerator {
         Scanner scan = new Scanner(System.in);
         System.out.println("Desexa saír da aplicación? S/N:");
         do {
-            answer = scan.next().charAt(0);
+            answer = scan.nextLine().charAt(0);
 
             if (answer == 's' || answer == 'S') {
                 System.out.println("Ata a próxima!!");
