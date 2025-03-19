@@ -4,8 +4,6 @@
  */
 package ui;
 
-import hangman.ui.GenerateWordException;
-import hangman.ui.WordGenerator;
 import java.util.Random;
 
 /**

@@ -5,7 +5,6 @@
 package ui;
 
 import hangman.model.HangMan;
-import hangman.ui.GenerateWordException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -299,19 +298,14 @@ public class MainWindow extends javax.swing.JFrame {
         String selectedMode = (String) JOptionPane.showInputDialog(bottomPanel, "Seleccione un modo de xogo", "Modo de xogo", HEIGHT, null, option, option[0]);
         if (selectedMode != null) {
             try {
+                WordGenerator wordGenerator;
                 if (selectedMode.equals(option[0])) {
-
-                    ArrayWordGenerator wordGenerator = new ArrayWordGenerator();
-                    hangMan = new HangMan(wordGenerator.generateWord());
-
-                    initialStatus();
-
+                    wordGenerator = new ArrayWordGenerator();
                 } else {
-                    GUIKeyboardWordgenerator kWordGenerator = new GUIKeyboardWordgenerator();
-                    hangMan = new HangMan(kWordGenerator.generateWord());
-
-                    initialStatus();
+                    wordGenerator = new GUIKeyboardWordgenerator();                   
                 }
+                hangMan = new HangMan(wordGenerator.generateWord());
+                initialStatus();
             } catch (GenerateWordException e) {
                 System.out.println(e.getMessage());
             }

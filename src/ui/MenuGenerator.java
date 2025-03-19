@@ -5,13 +5,6 @@
 package ui;
 
 import hangman.model.HangMan;
-import ui.ArrayWordGenerator;
-import hangman.ui.GenerateWordException;
-import hangman.ui.GenerateWordException;
-import hangman.ui.KeyboardWordGenerator;
-import hangman.ui.KeyboardWordGenerator;
-import hangman.ui.WordGenerator;
-import hangman.ui.WordGenerator;
 import java.util.Scanner;
 
 /**
