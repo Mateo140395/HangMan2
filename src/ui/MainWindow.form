@@ -262,7 +262,7 @@
         <Component class="javax.swing.JLabel" name="firstLabel">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/mateo.alfayafontan/NetBeansProjects/HangMan/Images/Hangman-0.png"/>
+              <Image iconType="3" name="/images/Hangman-0.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -274,7 +274,7 @@
         <Component class="javax.swing.JLabel" name="oneFailLabel">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/mateo.alfayafontan/NetBeansProjects/HangMan/Images/Hangman-1.png"/>
+              <Image iconType="3" name="/images/Hangman-1.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -286,7 +286,7 @@
         <Component class="javax.swing.JLabel" name="twoFailsLabel">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/mateo.alfayafontan/NetBeansProjects/HangMan/Images/Hangman-2.png"/>
+              <Image iconType="3" name="/images/Hangman-2.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -298,7 +298,7 @@
         <Component class="javax.swing.JLabel" name="threeFailsLabel">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/mateo.alfayafontan/NetBeansProjects/HangMan/Images/Hangman-3.png"/>
+              <Image iconType="3" name="/images/Hangman-3.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -310,7 +310,7 @@
         <Component class="javax.swing.JLabel" name="fourFailsLabel">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/mateo.alfayafontan/NetBeansProjects/HangMan/Images/Hangman-4.png"/>
+              <Image iconType="3" name="/images/Hangman-4.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -322,7 +322,7 @@
         <Component class="javax.swing.JLabel" name="fiveFailsLabel">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/mateo.alfayafontan/NetBeansProjects/HangMan/Images/Hangman-5.png"/>
+              <Image iconType="3" name="/images/Hangman-5.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -334,7 +334,7 @@
         <Component class="javax.swing.JLabel" name="sixFailsLabel">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/mateo.alfayafontan/NetBeansProjects/HangMan/Images/Hangman-6.png"/>
+              <Image iconType="3" name="/images/Hangman-6.png"/>
             </Property>
           </Properties>
           <Constraints>
