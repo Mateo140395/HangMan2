@@ -292,17 +292,21 @@ public class MainWindow extends javax.swing.JFrame {
     private void startNewGame() {
         String[] option = new String[]{
             "Un xogador, xerando a palabra ao azar",
-            "Dous xogadores, un xera a palabra e o outro adiviña"
+            "Dous xogadores, un xera a palabra e o outro adiviña",
+            "Un xogador, escollendo unha palabra dunha base de datos"
+             
         };
         //Crea un cadro de diálogo con dúas opcións e a primeira preseleccionada
         String selectedMode = (String) JOptionPane.showInputDialog(bottomPanel, "Seleccione un modo de xogo", "Modo de xogo", HEIGHT, null, option, option[0]);
         if (selectedMode != null) {
             try {
-                WordGenerator wordGenerator;
+                WordGenerator wordGenerator=null;
                 if (selectedMode.equals(option[0])) {
                     wordGenerator = new ArrayWordGenerator();
-                } else {
+                } else if (selectedMode.equals(option[1])){
                     wordGenerator = new GUIKeyboardWordgenerator();                   
+                }else{
+                    wordGenerator = new DBWordGenerator();
                 }
                 hangMan = new HangMan(wordGenerator.generateWord());
                 initialStatus();
